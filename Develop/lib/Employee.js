@@ -9,7 +9,7 @@
 //   * getEmail()
 //   * getRole() // Returns 'Employee'
 
-class employee {
+class Employee {
     constructor(name, email, id) {
         this.name = name;
         this.id = id;
@@ -24,4 +24,4 @@ class employee {
 }
 
 
-module.exports = employee;
+module.exports = Employee;
