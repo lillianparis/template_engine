@@ -16,10 +16,17 @@ class Employee {
         this.email = email;
     }
     // Now the information needs to print 
-    printInfo() {
-        for (const key in this) {
-            console.log(`${key}: ${this[key]}`);
-        }
+    getName() {
+        return this.name;
+    }
+    getId() {
+        return this.id;
+    }
+    getEmail() {
+        return this.email;
+    }
+    getRole() {
+        return "Employee";
     }
 }
 
