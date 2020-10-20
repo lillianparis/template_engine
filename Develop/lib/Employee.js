@@ -8,7 +8,7 @@
 //   * getId()
 //   * getEmail()
 //   * getRole() // Returns 'Employee'
-
+var inquirer = require('inquirer');
 class Employee {
     constructor(name, email, id) {
         this.name = name;
