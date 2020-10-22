@@ -93,19 +93,21 @@ function startEmployee() {
             }
         })
 }
-
+// At the end the user will be prompted if they want to add another user to the list, if not.. the user will be displayed with and html file of the users they have entered.
 function addRole() {
     inquirer.prompt([
         {
             type: "confirm",
             name: "Add",
             message: "Would you like to add another employee?",
+            // Starts with true but user can pick false
             default: true,
         }
         // After the user has input all employees desired, call the `render` function (required
         // above) and pass in an array containing all employee objects; the `render` function will
         // generate and return a block of HTML including templated divs for each employee!
     ]).then(function (res) {
+        // displays response
         console.log(res)
         if (res.Add) {
             newEmployee()
@@ -119,14 +121,14 @@ function addRole() {
     })
 }
 
-startEmployee();
-
-
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
 // `output` folder. You can use the variable `outputPath` above target this location.
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
+startEmployee();
+
+
 
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
