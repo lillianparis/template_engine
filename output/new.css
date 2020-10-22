@@ -1,6 +1,12 @@
 #heading {
-    background-color: rgb(86, 178, 214);
+    background-color: rgb(77, 173, 218);
 }
-#header {
-    background-color: burlywood;
+#managerhead {
+    background-color: rgb(224, 178, 117);
+}
+#internhead {
+    background-color: rgb(124, 228, 185);
+}
+#engineerhead {
+    background-color: rgb(226, 156, 215);
 }
