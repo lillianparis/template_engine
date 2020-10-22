@@ -110,7 +110,7 @@ function addRole() {
         // displays response
         console.log(res)
         if (res.Add) {
-            newEmployee();
+            startEmployee();
         } else {
             const employeeData = render(employees);
             fs.writeFile(outputPath, employeeData, function (err) {
