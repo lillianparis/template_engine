@@ -18,6 +18,7 @@ const employees = [];
 function startEmployee() {
     inquirer.prompt([
         {
+            // Questions asked to the user 
             type: "list",
             name: "Choose",
             message: "Choose new role you would like to add:",
@@ -55,6 +56,7 @@ function startEmployee() {
 
                     }
                 ])
+                // Depending on the employee type, the code returns the specific question for each
                     .then(function (res) {
                         const manager = new Manager(answers.Name, answers.Id, answers.Email, res.Office);
                         employees.push(manager);
@@ -115,7 +117,8 @@ function addRole() {
             const employeeData = render(employees);
             fs.writeFile(outputPath, employeeData, function (err) {
                 if (err) throw err;
-                console.log("Added new employee(s)")
+                // User is prompted that new employees have been added, once they've finished adding them in
+                console.log("Adding new employee(s)")
             })
         }
     })
