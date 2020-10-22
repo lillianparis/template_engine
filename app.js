@@ -13,10 +13,114 @@ const render = require("./lib/htmlRenderer");
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
+const employees = []
 
-// After the user has input all employees desired, call the `render` function (required
-// above) and pass in an array containing all employee objects; the `render` function will
-// generate and return a block of HTML including templated divs for each employee!
+function startEmployee() {
+    inquirer.prompt([
+        {
+            type: "list",
+            name: "Choose",
+            message: "Choose new role you would like to add:",
+            choices: ["Manager", "Engineer", "Intern"],
+        },
+        {
+
+            type: "input",
+            name: "Name",
+            message: "Enter employee's name:",
+        },
+        {
+            type: "input",
+            name: "Id",
+            message: "Enter employee's ID:",
+        },
+        {
+            type: "input",
+            name: "Email",
+            message: "Enter employee's email:",
+        },
+        
+    ])
+    // HINT: each employee type (manager, engineer, or intern) has slightly different
+    // information; write your code to ask different questions via inquirer depending on
+    // employee type.
+        .then(function (answers) {
+            if (answers.Choose === "Manager") {
+                inquirer.prompt([
+                    {
+
+                        type: "input",
+                        name: "Office",
+                        message: "Enter employee's office number",
+
+                    }
+                ])
+                    .then(function (res) {
+                        const manager = new Manager(answers.Name, answers.Id, answers.Email, res.Office);
+                        employees.push(manager);
+                        addRole();
+                    })
+            } else if (answers.Choose === "Engineer") {
+                inquirer.prompt([
+                    {
+
+                        type: "input",
+                        name: "Github",
+                        message: "Enter employee's GitHub username:",
+
+                    }
+                ])
+                    .then(function (res) {
+                        const engineer = new Engineer(answers.Name, answers.Id, answers.Email, res.Github);
+                        employees.push(engineer);
+                        addRole();
+                    })
+            } else if (answers.Choose === "Intern") {
+                inquirer.prompt([
+                    {
+
+                        type: "input",
+                        name: "School",
+                        message: "Enter employee's School:",
+
+                    }
+                ])
+                    .then(function (res) {
+                        const intern = new Intern(answers.Name, answers.Id, answers.Email, res.School);
+                        employees.push(intern);
+                        addRole();
+                    })
+            }
+        })
+}
+
+function addRole() {
+    inquirer.prompt([
+        {
+            type: "confirm",
+            name: "Add",
+            message: "Would you like to add another employee?",
+            default: true,
+        }
+        // After the user has input all employees desired, call the `render` function (required
+        // above) and pass in an array containing all employee objects; the `render` function will
+        // generate and return a block of HTML including templated divs for each employee!
+    ]).then(function (res) {
+        console.log(res)
+        if (res.Add) {
+            newEmployee()
+        } else {
+            const employeeData = render(employees);
+            fs.writeFile(outputPath, employeeData, function (err) {
+                if (err) throw err;
+                console.log("Added new employee(s)")
+            })
+        }
+    })
+}
+
+startEmployee();
+
 
 // After you have your html, you're now ready to create an HTML file using the HTML
 // returned from the `render` function. Now write it to a file named `team.html` in the
@@ -24,9 +128,6 @@ const render = require("./lib/htmlRenderer");
 // Hint: you may need to check if the `output` folder exists and create it if it
 // does not.
 
-// HINT: each employee type (manager, engineer, or intern) has slightly different
-// information; write your code to ask different questions via inquirer depending on
-// employee type.
 
 // HINT: make sure to build out your classes first! Remember that your Manager, Engineer,
 // and Intern classes should all extend from a class named Employee; see the directions
